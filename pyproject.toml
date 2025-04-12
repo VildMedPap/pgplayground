@@ -1,0 +1,14 @@
+[project]
+name = "pgplayground"
+version = "0.1.0"
+description = "PostgreSQL playground for testing different features"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas>=2.2.3",
+    "psycopg2-binary>=2.9.9",
+    "pydantic>=2.11.3",
+    "pydantic-settings>=2.8.1",
+    "python-dotenv>=1.0.0",
+    "ujson>=5.10.0",
+]

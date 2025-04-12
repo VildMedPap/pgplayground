@@ -1,0 +1,67 @@
+.DEFAULT_GOAL := help
+
+# Project paths - handle being included from subdirectories
+ROOT_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
+
+# Base image name
+BASE_IMAGE_NAME = postgres_playground
+
+.PHONY: help %
+
+help:
+	@$(ROOT_DIR)/help.sh "$(MAKEFILE_LIST)"
+
+%:
+	@echo "Target $@ is not defined. Running help target instead:\n"
+	@$(MAKE)
+
+.PHONY: build-base
+build-base: ## Build the base PostgreSQL image
+	@echo "Building base PostgreSQL image..."
+	docker build -t $(BASE_IMAGE_NAME):latest -f $(ROOT_DIR)Dockerfile.base .
+
+.PHONY: buildrun
+buildrun: ## Build and run the PostgreSQL container
+buildrun: build run
+
+.PHONY: build
+build: build-base ## Build the Docker image
+	@echo "Building $(IMAGE_NAME)..."
+	docker build -t $(IMAGE_NAME) .
+
+.PHONY: run
+run: ## Run the PostgreSQL container
+	@echo "Running $(IMAGE_NAME)..."
+	docker run --rm -d --name $(CONTAINER_NAME) -p 5432:5432 $(IMAGE_NAME)
+
+	@echo "Waiting for PostgreSQL to be ready..."
+	@until docker exec $(CONTAINER_NAME) pg_isready -U testuser -d testdb; do \
+		echo "Waiting for PostgreSQL to be ready..."; \
+		sleep 1; \
+	done
+	@echo "PostgreSQL is ready!"
+
+.PHONY: stop-container
+stop-container: ## Stop the running container
+	@if docker inspect $(CONTAINER_NAME) >/dev/null 2>&1; then \
+		if docker inspect $(CONTAINER_NAME) --format='{{.State.Running}}' | grep -q "true"; then \
+			docker stop $(CONTAINER_NAME); \
+			echo "Container $(CONTAINER_NAME) stopped."; \
+		else \
+			echo "Container $(CONTAINER_NAME) is not running."; \
+		fi \
+	else \
+		echo "Container $(CONTAINER_NAME) does not exist."; \
+	fi
+
+.PHONY: delete-image
+delete-image: ## Delete the Docker image
+	@if docker image inspect $(IMAGE_NAME) >/dev/null 2>&1; then \
+		docker rmi $(IMAGE_NAME); \
+		echo "Image $(IMAGE_NAME) removed."; \
+	else \
+		echo "Image $(IMAGE_NAME) does not exist."; \
+	fi
+
+.PHONY: teardown
+teardown: stop-container delete-image ## Stop container and delete image 

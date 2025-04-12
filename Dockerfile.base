@@ -1,0 +1,7 @@
+# Use the official Postgres image as a base
+FROM postgres:17.4
+
+# Set environment variables
+ENV POSTGRES_DB=testdb
+ENV POSTGRES_USER=testuser
+ENV POSTGRES_PASSWORD=testpassword
