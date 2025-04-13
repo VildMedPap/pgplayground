@@ -26,6 +26,9 @@ A PostgreSQL implementation of a task queue system. Demonstrates how to use Post
 ### Vectors
 A PostgreSQL implementation using the pgvector extension for vector similarity search. Includes functionality for inserting both simulated and real vector embeddings.
 
+### Indexes
+A guide to PostgreSQL indexing strategies, including different index types (B-tree, Hash, GIN, GiST, BRIN), compound indexes, partial indexes, and best practices for index maintenance and performance monitoring.
+
 ## Project Structure
 
 Each feature is organized in its own directory with a consistent structure:
