@@ -29,6 +29,9 @@ A PostgreSQL implementation using the pgvector extension for vector similarity s
 ### Indexes
 A guide to PostgreSQL indexing strategies, including different index types (B-tree, Hash, GIN, GiST, BRIN), compound indexes, partial indexes, and best practices for index maintenance and performance monitoring.
 
+### Partitions
+A guide to PostgreSQL table partitioning strategies, covering LIST, RANGE, and HASH partitioning types, along with best practices for partition management, performance optimization, and migration strategies.
+
 ## Project Structure
 
 Each feature is organized in its own directory with a consistent structure:
