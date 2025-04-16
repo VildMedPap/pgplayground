@@ -6,7 +6,7 @@ import psycopg2
 from dotenv import load_dotenv
 from psycopg2.extras import execute_values
 
-load_dotenv("../.env")
+load_dotenv("../../.env")
 
 conn_params = {
     "dbname": os.getenv("DB_NAME"),
@@ -63,9 +63,16 @@ def insert_sample_data(num_samples=1_000):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Insert simulated vectors into the database")
-    parser.add_argument("--num-vectors", type=int, default=1000, help="Number of vectors to insert (default: 1000)")
+    parser = argparse.ArgumentParser(
+        description="Insert simulated vectors into the database"
+    )
+    parser.add_argument(
+        "--num-vectors",
+        type=int,
+        default=1000,
+        help="Number of vectors to insert (default: 1000)",
+    )
     args = parser.parse_args()
-    
+
     insert_sample_data(args.num_vectors)
     print("Vector insertion completed successfully.")

@@ -7,6 +7,7 @@ A collection of PostgreSQL features and experiments organized in a modular struc
 Before using any of the features, you need to set up your environment:
 
 1. Copy the environment template file:
+
    ```bash
    cp .env.template .env
    ```
@@ -21,20 +22,25 @@ Before using any of the features, you need to set up your environment:
 ## Features
 
 ### Queues
+
 A PostgreSQL implementation of a task queue system. Demonstrates how to use PostgreSQL for task management, including task insertion and processing with multiple workers.
 
 ### Vectors
+
 A PostgreSQL implementation using the pgvector extension for vector similarity search. Includes functionality for inserting both simulated and real vector embeddings.
 
 ### Indexes
+
 A guide to PostgreSQL indexing strategies, including different index types (B-tree, Hash, GIN, GiST, BRIN), compound indexes, partial indexes, and best practices for index maintenance and performance monitoring.
 
 ### Partitions
+
 A guide to PostgreSQL table partitioning strategies, covering LIST, RANGE, and HASH partitioning types, along with best practices for partition management, performance optimization, and migration strategies.
 
 ## Project Structure
 
 Each feature is organized in its own directory with a consistent structure:
+
 - `Makefile` - Feature-specific build and run commands
 - `Dockerfile` - Feature-specific Docker configuration
 - `init.sql` - Database initialization scripts
@@ -57,7 +63,7 @@ Each feature's Makefile includes this base Makefile and extends it with feature-
 
 ```makefile
 # Include shared Makefile
-include ../Makefile.base
+include ../../Makefile.base
 
 # Define project-specific variables
 IMAGE_NAME = postgres_feature_name
@@ -102,29 +108,29 @@ COPY ./init.sql /docker-entrypoint-initdb.d/
 ### Running a Feature
 
 1. Navigate to the feature directory:
+
    ```bash
-   cd queues  # or cd vectors
+   cd features/queues
    ```
 
 2. Build and run the feature:
+
    ```bash
    make buildrun
    ```
 
 3. View available targets:
+
    ```bash
    make help  # or simply just: make
    ```
 
 4. Run feature-specific targets:
+
    ```bash
    # For queues
    make insert-tasks NUM_TASKS=50
    make process-tasks NUM_WORKERS=3
-   
-   # For vectors
-   make insert-simulated-vectors NUM_VECTORS=5000
-   make insert-real-vectors
    ```
 
 5. Clean up when done:

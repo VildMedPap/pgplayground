@@ -5,7 +5,7 @@ import psycopg2
 from dotenv import load_dotenv
 from psycopg2.extras import execute_values
 
-load_dotenv("../.env")
+load_dotenv("../../.env")
 
 conn_params = {
     "dbname": os.getenv("DB_NAME"),

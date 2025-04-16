@@ -1,5 +1,5 @@
 # Include shared Makefile
-include ../Makefile.base
+include ../../Makefile.base
 
 # Define project-specific variables
 IMAGE_NAME = postgres_indexes
