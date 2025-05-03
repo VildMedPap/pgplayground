@@ -21,6 +21,10 @@ Before using any of the features, you need to set up your environment:
 
 ## Features
 
+### Vanilla
+
+A simple PostgreSQL setup without any special features or initialization. Perfect for quick experiments or when you just need a clean PostgreSQL instance.
+
 ### Queues
 
 A PostgreSQL implementation of a task queue system. Demonstrates how to use PostgreSQL for task management, including task insertion and processing with multiple workers.
@@ -104,6 +108,26 @@ COPY ./init.sql /docker-entrypoint-initdb.d/
 ```
 
 ## Usage
+
+### Quick Start - Vanilla PostgreSQL
+
+If you just need a clean PostgreSQL instance without any special features:
+
+```bash
+cd features/vanilla
+make buildrun
+```
+
+This will give you a PostgreSQL instance with:
+- Database: `testdb`
+- Username: `testuser`
+- Password: `testpassword`
+- Port: `5432`
+
+When you're done, clean up with:
+```bash
+make teardown
+```
 
 ### Running a Feature
 
