@@ -41,6 +41,15 @@ A guide to PostgreSQL indexing strategies, including different index types (B-tr
 
 A guide to PostgreSQL table partitioning strategies, covering LIST, RANGE, and HASH partitioning types, along with best practices for partition management, performance optimization, and migration strategies.
 
+### Stored Routines
+
+A comprehensive guide to PostgreSQL's stored routines capabilities, including functions, procedures, and triggers. Uses a practical BMI (Body Mass Index) calculation example to demonstrate:
+- Functions for calculations and read-only operations
+- Procedures for batch operations with transaction control
+- Triggers for maintaining derived data
+- Complex data analysis using functions
+- Best practices for each type of stored routine
+
 ## Project Structure
 
 Each feature is organized in its own directory with a consistent structure:
