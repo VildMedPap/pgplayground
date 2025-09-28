@@ -1,5 +1,5 @@
 # Use the official Postgres image as a base
-FROM postgres:17.4
+FROM postgres:18
 
 # Set environment variables
 ENV POSTGRES_DB=testdb
