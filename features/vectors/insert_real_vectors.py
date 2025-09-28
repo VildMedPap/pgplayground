@@ -25,7 +25,7 @@ conn_params = {
 }
 
 # CSV file path
-CSV_FILE = "real_embeddings.csv"
+CSV_FILE = "data/real_embeddings.csv"
 
 
 def insert_vectors_from_csv(batch_size=1000):
