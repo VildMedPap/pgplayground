@@ -77,11 +77,36 @@ conn_params = {
 ```
 
 ## Technology Stack
-- **PostgreSQL**: 17.4 with various extensions (pgvector for vectors feature)
+- **PostgreSQL**: 18 with various extensions (pgvector for vectors feature)
 - **Python**: 3.12+ with uv package manager
-- **Dependencies**: psycopg2-binary, pandas, pydantic, python-dotenv, ujson
 - **Docker**: Multi-stage builds with health checks
 - **Make**: GNU Make with sophisticated help system
+
+### Dependency Management Strategy
+
+**All Python dependencies use uv's inline script feature**:
+- No project-wide dependencies in `pyproject.toml` (kept empty)
+- Each script declares its own dependencies using uv's inline metadata
+- This ensures complete isolation between features
+- Scripts are run with `uv run` which automatically handles the environment
+
+Example of inline dependencies:
+```python
+#!/usr/bin/env python3
+# /// script
+# dependencies = [
+#   "psycopg2-binary>=2.9.9",
+#   "python-dotenv>=1.0.0",
+#   "ujson>=5.10.0",
+# ]
+# ///
+```
+
+Common dependencies by use case:
+- **Database operations**: `psycopg2-binary`, `python-dotenv`
+- **Data processing**: `pandas`, `numpy`, `ujson`
+- **Web/XML parsing**: `lxml`, `httpx`, `requests`
+- **Configuration**: `pydantic`, `pydantic-settings`
 
 ## Development Notes
 - No formal test framework - features are experimental/educational
@@ -98,6 +123,7 @@ conn_params = {
 - **partitions**: LIST, RANGE, HASH partitioning for large tables (>100GB)
 - **indexes**: B-tree, Hash, GIN, GiST, BRIN comparison with `EXPLAIN ANALYZE`
 - **stored_routines**: Functions vs procedures, triggers, transaction control
+- **fts**: Full Text Search with PostgreSQL 18's ICU collation improvements
 
 ### Performance Patterns
 - **Bulk inserts**: Use `execute_values()` instead of individual inserts (10x+ faster)
