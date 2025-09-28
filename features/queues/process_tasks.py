@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# /// script
+# dependencies = [
+#   "psycopg2-binary>=2.9.9",
+#   "python-dotenv>=1.0.0",
+# ]
+# ///
+
 import os
 import time
 import uuid
